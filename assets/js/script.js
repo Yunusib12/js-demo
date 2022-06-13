@@ -132,14 +132,27 @@ const animals = ["Lion", "zebra", "Cat", "Duck", "Dog"];
 
 let userAnswer = prompt("What is your favorite animal?");
 
-// userAnswer = userAnswer.toLowerCase(); //C put everything in lowecase (miniscule)
-console.log(userAnswer)
-console.log(animals)
-    // console.log(animals[3]) // get elment based on index
-    // console.log(animals.length) // array length (taille)
-    // console.log(animals.indexOf("Dogs")); // lookup if the element exist in the array and return the index
-const animalIndex = animals.indexOf(userAnswer);
-console.log(animalIndex);
+userAnswer = userAnswer.toLowerCase(); //C put everything in lowecase (miniscule)
+const arrayLength = animals.length;
+// console.log(userAnswer)
+// console.log(animals)
+// console.log(animals[3]) // get elment based on index
+// console.log(animals.length) // array length (taille)
+// console.log(animals.indexOf("Dogs")); // lookup if the element exist in the array and return the index
+// const animalIndex = animals.indexOf(userAnswer);
+let animalIndex = -1; // initialize with -1 not found
+
+// For Loop 
+for (let i = 0; i < arrayLength; i++) {
+    const animal = animals[i].toLowerCase();
+    if (animal === userAnswer) {
+        animalIndex = i;
+        // animalIndex = animals.indexOf(animals[i])
+        // console.log(animalIndex);
+    }
+}
+
+// console.log(animalIndex);
 if (animalIndex !== -1) {
 
     if (animals[animalIndex].toLowerCase() === "cat") {
@@ -152,8 +165,29 @@ if (animalIndex !== -1) {
     console.log("Animal not found in the list!");
 }
 
+// For Loop ->
 
+// const animals = ["Lion", "zebra", "Cat", "Duck", "Dog", "Chiken"]; // 6 elements => 5 indexes each array start with 0 index
+// console.log(animals.length);
+// console.log(animals[0])
+// console.log(animals[1])
+// console.log(animals[2])
+// console.log(animals[3])
+// console.log(animals[4])
 
+// const arrayLength = animals.length;
+
+// Loops through each index of the Array.
+// 1. initialize the loop by the variable declaration or counter(iterator) let i = 0;
+// 2. Loop condition
+// 3. Iteration (addition) or increment
+// => at the beggining 0
+// => after each iteration we add (0 + 1)
+// code goes inside the loop
+// for (let i = 0; i < arrayLength; i++) {
+//     console.log(`I eat ${animals[i].toLowerCase()}`);
+//     // console.log("I love" + animals[i]);
+// }
 
 
 
