@@ -127,43 +127,43 @@ let studentInfo = { // Object -> KEY:VALUE (Number, String, Boolean, Array, func
 
 // ARRAYS
 
-const animals = ["Lion", "zebra", "Cat", "Duck", "Dog"];
+// const animals = ["Lion", "zebra", "Cat", "Duck", "Dog"];
 // index 0,1,2,3,4
 
-let userAnswer = prompt("What is your favorite animal?");
+// let userAnswer = prompt("What is your favorite animal?");
 
-userAnswer = userAnswer.toLowerCase(); //C put everything in lowecase (miniscule)
-const arrayLength = animals.length;
+// userAnswer = userAnswer.toLowerCase(); //C put everything in lowecase (miniscule)
+// const arrayLength = animals.length;
 // console.log(userAnswer)
 // console.log(animals)
 // console.log(animals[3]) // get elment based on index
 // console.log(animals.length) // array length (taille)
 // console.log(animals.indexOf("Dogs")); // lookup if the element exist in the array and return the index
 // const animalIndex = animals.indexOf(userAnswer);
-let animalIndex = -1; // initialize with -1 not found
+// let animalIndex = -1; // initialize with -1 not found
 
 // For Loop 
-for (let i = 0; i < arrayLength; i++) {
-    const animal = animals[i].toLowerCase();
-    if (animal === userAnswer) {
-        animalIndex = i;
-        // animalIndex = animals.indexOf(animals[i])
-        // console.log(animalIndex);
-    }
-}
+// for (let i = 0; i < arrayLength; i++) {
+//     const animal = animals[i].toLowerCase();
+//     if (animal === userAnswer) {
+//         animalIndex = i;
+//         // animalIndex = animals.indexOf(animals[i])
+//         // console.log(animalIndex);
+//     }
+// }
 
 // console.log(animalIndex);
-if (animalIndex !== -1) {
+// if (animalIndex !== -1) {
 
-    if (animals[animalIndex].toLowerCase() === "cat") {
-        console.log("Is  my favorite too!")
-    } else {
-        console.log("Not my favorite!");
-    }
+//     if (animals[animalIndex].toLowerCase() === "cat") {
+//         console.log("Is  my favorite too!")
+//     } else {
+//         console.log("Not my favorite!");
+//     }
 
-} else {
-    console.log("Animal not found in the list!");
-}
+// } else {
+//     console.log("Animal not found in the list!");
+// }
 
 // For Loop ->
 
@@ -188,6 +188,73 @@ if (animalIndex !== -1) {
 //     console.log(`I eat ${animals[i].toLowerCase()}`);
 //     // console.log("I love" + animals[i]);
 // }
+
+
+// document.onkeyup = function(event) {
+//     const userGuess = event.key;
+
+//     console.log('userGuess', userGuess);
+// }
+
+
+
+const myFarm = ["chikens", "pigs", "cows", "horses", "ostriches"]
+const myFarmLenght = myFarm.length
+
+for (let i = 0; i < myFarmLenght; i++) {
+    const animal = myFarm[i]
+    console.log(animal) // solution1 
+
+    //Solution 2
+    if (animal.charAt(0) === "c" || animal.charAt(0) === "o") {
+        console.log(`${animal} Stars with c or an o!`)
+    }
+}
+// Loop iteration 
+//1. chickens ->index(0)
+//2. pigs ->index(1)
+//3. cows ->index(2)
+//4. horses ->index(3)
+//5. ostriches ->index(4)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
