@@ -386,59 +386,108 @@
 // Randomly chooses a choice from the options array. This is the Computer's guess.
 // const computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
 // Creates an array that lists out all of the options (Rock, Paper, or Scissors).
-let computerChoices = ["r", "p", "s"];
+//let computerChoices = ["r", "p", "s"];
 
 // Creating letiables to hold the number of wins, losses, and ties. They start at 0.
-let wins = 0;
-let losses = 0;
-let ties = 0;
+// let wins = 0;
+// let losses = 0;
+// let ties = 0;
 
 // Create letiables that hold references to the places in the HTML where we want to display things.
-let directionsText = document.getElementById("directions-text");
-let userChoiceText = document.getElementById("userchoice-text");
-let computerChoiceText = document.getElementById("computerchoice-text");
-let winsText = document.getElementById("wins-text");
-let lossesText = document.getElementById("losses-text");
-let tiesText = document.getElementById("ties-text");
+// let directionsText = document.getElementById("directions-text");
+// let userChoiceText = document.getElementById("userchoice-text");
+// let computerChoiceText = document.getElementById("computerchoice-text");
+// let winsText = document.getElementById("wins-text");
+// let lossesText = document.getElementById("losses-text");
+// let tiesText = document.getElementById("ties-text");
 
 // This function is run whenever the user presses a key.
-document.onkeyup = function(e) {
+//document.onkeyup = function(e) {
 
-    // Determines which key was pressed.
-    let userGuess = e.key;
+// Determines which key was pressed.
+// let userGuess = e.key;
 
-    // Randomly chooses a choice from the options array. This is the Computer's guess.
-    let computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+// Randomly chooses a choice from the options array. This is the Computer's guess.
+// let computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
 
-    // Reworked our code from last step to use "else if" instead of lots of if statements.
+// Reworked our code from last step to use "else if" instead of lots of if statements.
 
-    // This logic determines the outcome of the game (win/loss/tie), and increments the appropriate number
-    if ((userGuess === "r") || (userGuess === "p") || (userGuess === "s")) {
+// This logic determines the outcome of the game (win/loss/tie), and increments the appropriate number
+// if ((userGuess === "r") || (userGuess === "p") || (userGuess === "s")) {
 
-        if ((userGuess === "r" && computerGuess === "s") ||
-            (userGuess === "s" && computerGuess === "p") ||
-            (userGuess === "p" && computerGuess === "r")) {
-            wins++;
-        } else if (userGuess === computerGuess) {
-            ties++;
-        } else {
-            losses++;
-        }
+//     if ((userGuess === "r" && computerGuess === "s") ||
+//         (userGuess === "s" && computerGuess === "p") ||
+//         (userGuess === "p" && computerGuess === "r")) {
+//         wins++;
+//     } else if (userGuess === computerGuess) {
+//         ties++;
+//     } else {
+//         losses++;
+//     }
 
-        // Hide the directions
-        directionsText.textContent = "";
+//     // Hide the directions
+//     directionsText.textContent = "";
 
-        // Display the user and computer guesses, and wins/losses/ties.
-        userChoiceText.textContent = "You chose: " + userGuess;
-        computerChoiceText.textContent = "The computer chose: " + computerGuess;
-        winsText.textContent = "wins: " + wins;
-        lossesText.textContent = "losses: " + losses;
-        tiesText.textContent = "ties: " + ties;
+//     // Display the user and computer guesses, and wins/losses/ties.
+//     userChoiceText.textContent = "You chose: " + userGuess;
+//     computerChoiceText.textContent = "The computer chose: " + computerGuess;
+//     winsText.textContent = "wins: " + wins;
+//     lossesText.textContent = "losses: " + losses;
+//     tiesText.textContent = "ties: " + ties;
+// }
+//};
+// ===> DONE
+// TYPES VARIABLES (NUMBER, STRING, BOOLEAN, ARRAY, FUNCTION, OBJECT)
+// LOOP (FOR)
+// FUnctions
+// EVENTS (KEYUP, CLICK)
+// LINK ELEMENTS JS TO HTML
+// WRITE CONTENT IN THE DOM (DOCUMENT OBJECT MODEL) - PAGE
+// CREATE ELEMENTS IN THE DOM FROM JS
+
+// ELement Reference
+// let btnSubmit = document.getElementById("btnSubmit")
+const btnSubmit = document.querySelector("#btnSubmit")
+const foodList = document.querySelector("#foodList")
+
+// Array
+const foods = ["Beans", "Rice", "Peanut", "Willy's chicken"]
+
+//Function
+const food = (foods) => {
+    const ul = document.createElement("ul")
+
+    for (let i = 0; i < foods.length; i++) {
+        const li = document.createElement("li")
+        li.textContent = foods[i]
+
+        ul.appendChild(li)
+        console.log(foods[i])
     }
-};
+
+    foodList.appendChild(ul)
+
+    /* 
+    <div id="foodList">
+        <ul>
+            <li>Beans</li>
+            ...
+        </u>
+    </div>
+    */
+}
+
+//EVENT - CLick
+btnSubmit.addEventListener("click", () => {
+    food(foods)
+})
 
 
+
+// ===> COMING
 /// Session Storage - LocalStorage - Cookie -->
+
+// MORE LOOP (MAP, FILTER, FOREACH)
 
 
 
