@@ -449,14 +449,15 @@
 // let btnSubmit = document.getElementById("btnSubmit")
 const btnSubmit = document.querySelector("#btnSubmit")
 const foodList = document.querySelector("#foodList")
+const inputArrayElement = document.querySelector("#inputArrayElement")
 
 // Array
-const foods = ["Beans", "Rice", "Peanut", "Willy's chicken"]
+const foods = []
 
 //Function
 const food = (foods) => {
     const ul = document.createElement("ul")
-
+    foodList.textContent = ""
     for (let i = 0; i < foods.length; i++) {
         const li = document.createElement("li")
         li.textContent = foods[i]
@@ -477,9 +478,20 @@ const food = (foods) => {
     */
 }
 
+//
+function addElementToArray() {
+    foods.push()
+}
+
 //EVENT - CLick
 btnSubmit.addEventListener("click", () => {
-    food(foods)
+    // food(foods)
+    const food = inputArrayElement.value
+
+    /* 
+    - Send value to the function so it can be added to the array
+    - Display the array list 
+    */
 })
 
 
