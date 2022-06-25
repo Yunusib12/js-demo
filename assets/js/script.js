@@ -452,12 +452,31 @@ const foodList = document.querySelector("#foodList")
 const inputArrayElement = document.querySelector("#inputArrayElement")
 
 // Array
-const foods = []
+// let foods = (sessionStorage.getItem("foods") !== null) ? sessionStorage.getItem("foods") : [] // ternary operator -> if / else statement
+let foods = [];
+
+// SAve to SessionStorage / LocalStorage
+function saveToArray(food) {
+    /* Save array to 
+    sessionStorage -> Save temporary expire when session ends
+    
+    localStorage -> Save indefinetely never expire 
+    */
+    // Save element into Array
+    foods.push(food)
+        // JSON.stringify -> Array (Object) transform into a string 
+    sessionStorage.setItem("foods", JSON.stringify(foods))
+
+    // sessionStorage.removeItem("foods") -> Remove saved data from sessionStorage
+    // sessionStorage.clear() -> remove all saved data from sessionStorage
+}
 
 //Function
-const food = (foods) => {
+const displayFood = (foods) => {
     const ul = document.createElement("ul")
+
     foodList.textContent = ""
+
     for (let i = 0; i < foods.length; i++) {
         const li = document.createElement("li")
         li.textContent = foods[i]
@@ -468,19 +487,36 @@ const food = (foods) => {
 
     foodList.appendChild(ul)
 
-    /* 
-    <div id="foodList">
-        <ul>
-            <li>Beans</li>
-            ...
-        </u>
-    </div>
-    */
+
+    inputArrayElement.value = ""
+    inputArrayElement.focus()
+        /* 
+        <div id="foodList">
+            <ul>
+                <li>Beans</li>
+                ...
+            </u>
+        </div>
+        */
 }
 
-//
-function addElementToArray() {
-    foods.push()
+//Add element to Array
+function addElementToArray(food) {
+    // // Add food to the Array
+    // foods.push(food)
+
+    // Save Array to Session 
+    saveToArray(food)
+
+    // Display the elements of the Foods Array
+
+    if (sessionStorage.getItem("foods") !== null) {
+        foods = JSON.parse(sessionStorage.getItem("foods"));
+
+        displayFood(foods)
+    }
+
+
 }
 
 //EVENT - CLick
@@ -492,8 +528,29 @@ btnSubmit.addEventListener("click", () => {
     - Send value to the function so it can be added to the array
     - Display the array list 
     */
+
+    if (foods.indexOf(food) !== -1) {
+        alert("Food already exist!!")
+        inputArrayElement.value = ""
+    } else {
+        //Call the function addElementToArray 
+        addElementToArray(food)
+    }
+
 })
 
+// When page load
+if (sessionStorage.getItem("foods") !== null) {
+
+    foods = JSON.parse(sessionStorage.getItem("foods"))
+
+    /* 
+    JSON.stringify() -> Array transform into string 
+    JSON.parse() -> convert from string back to a object (array)
+    */
+
+    displayFood(foods)
+}
 
 
 // ===> COMING
@@ -502,8 +559,79 @@ btnSubmit.addEventListener("click", () => {
 // MORE LOOP (MAP, FILTER, FOREACH)
 
 
+/* FUNCTION
+ WHY / WHEN
+ -> Reduce code repetition
+ -> To execute a certain logic (task)
+ -> invoke myFunction(arguments-value)
+ -> take paramater function(parameter)
+ -> can be used as a callback function in events
+ or when it's used as an argument to another function
 
+ TYPE
+ -> Return a result "return (value)"
+ -> VOID does not return any result just execute
+ -> anonymous - no name
 
+ FORM
+ -> function() {
+    ...
+ }
+
+ -> () => {
+    ....
+ }
+
+ const myFunction = () => {
+    .....
+ }
+
+const myFunction = function() {
+    ....
+}
+
+INVOKE
+myFunction()
+*/
+
+//WILLY
+// function calculate(surface){
+//     return longeur * largeur
+// }
+
+// let surface = longeur * largeur
+
+//EMMAK
+const inputLargeur = document.querySelector("#inputLargeur")
+const inputLongeur = document.querySelector("#inputLongeur")
+const buttonCalculate = document.querySelector("#buttonCalculate")
+const surfaceResult = document.querySelector("#surfaceResult")
+
+function calculateSurface(longeur, largeur) {
+    return longeur * largeur
+}
+
+buttonCalculate.addEventListener("click", () => {
+
+    let longeur = parseInt(inputLongeur.value)
+    let largeur = parseInt(inputLargeur.value)
+
+    if (!isNaN(largeur) && !isNaN(longeur)) {
+        let surface = calculateSurface(longeur, largeur)
+
+        surfaceResult.textContent = surface
+
+    } else {
+
+        alert("Only numbers allowed!!")
+    }
+
+    // Reset value
+    inputLargeur.value = ""
+    inputLongeur.value = ""
+
+    inputLongeur.focus()
+})
 
 
 
