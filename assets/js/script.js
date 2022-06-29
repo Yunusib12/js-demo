@@ -540,17 +540,17 @@ btnSubmit.addEventListener("click", () => {
 })
 
 // When page load
-if (sessionStorage.getItem("foods") !== null) {
+// if (sessionStorage.getItem("foods") !== null) {
 
-    foods = JSON.parse(sessionStorage.getItem("foods"))
+//     foods = JSON.parse(sessionStorage.getItem("foods"))
 
-    /* 
-    JSON.stringify() -> Array transform into string 
-    JSON.parse() -> convert from string back to a object (array)
-    */
+//     /*
+//     JSON.stringify() -> Array transform into string
+//     JSON.parse() -> convert from string back to a object (array)
+//     */
 
-    displayFood(foods)
-}
+//     displayFood(foods)
+// }
 
 
 // ===> COMING
@@ -615,12 +615,17 @@ buttonCalculate.addEventListener("click", () => {
 
     let longeur = parseInt(inputLongeur.value)
     let largeur = parseInt(inputLargeur.value)
+    let dimension = {
+        "longeur": longeur,
+        "largeur": largeur,
+        "surface": surface
+    }
 
     if (!isNaN(largeur) && !isNaN(longeur)) {
         let surface = calculateSurface(longeur, largeur)
 
         surfaceResult.textContent = surface
-
+        console.log('surface', surface)
     } else {
 
         alert("Only numbers allowed!!")
@@ -635,16 +640,53 @@ buttonCalculate.addEventListener("click", () => {
 
 
 
+// parentElement.append(students,teachers)
+
+// parentElement.appendChild(students)
+// parentElement.appendChild(teachers)
 
 
 
+/*
+TYPE VARIABLES
+String
+Array
+Boolean
+Object
+Number
+
+
+REFERENCE ELEMENTS
+
+
+EVENTS
+
+
+FUNCTIONS
+Rajab, Willy
+
+SESSION
+Iddi, Rajab, Willy
 
 
 
+*/
 
 
+/*
+1. Create an object that will save the `Calculation`
+- longeur
+- largeur
+- surface
+
+2. Save the object into an array
+
+3. Save the Array into the session
+
+4. Display Array elements (calculation ) as a list on the page
 
 
+*/
 
 
 
