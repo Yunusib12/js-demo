@@ -447,97 +447,97 @@
 
 // ELement Reference
 // let btnSubmit = document.getElementById("btnSubmit")
-const btnSubmit = document.querySelector("#btnSubmit")
-const foodList = document.querySelector("#foodList")
-const inputArrayElement = document.querySelector("#inputArrayElement")
+// const btnSubmit = document.querySelector("#btnSubmit")
+// const foodList = document.querySelector("#foodList")
+// const inputArrayElement = document.querySelector("#inputArrayElement")
 
-// Array
-// let foods = (sessionStorage.getItem("foods") !== null) ? sessionStorage.getItem("foods") : [] // ternary operator -> if / else statement
-let foods = [];
+// // Array
+// // let foods = (sessionStorage.getItem("foods") !== null) ? sessionStorage.getItem("foods") : [] // ternary operator -> if / else statement
+// let foods = [];
 
-// SAve to SessionStorage / LocalStorage
-function saveToArray(food) {
-    /* Save array to 
-    sessionStorage -> Save temporary expire when session ends
-    
-    localStorage -> Save indefinetely never expire 
-    */
-    // Save element into Array
-    foods.push(food)
-        // JSON.stringify -> Array (Object) transform into a string 
-    sessionStorage.setItem("foods", JSON.stringify(foods))
+// // SAve to SessionStorage / LocalStorage
+// function saveToArray(food) {
+//     /* Save array to 
+//     sessionStorage -> Save temporary expire when session ends
 
-    // sessionStorage.removeItem("foods") -> Remove saved data from sessionStorage
-    // sessionStorage.clear() -> remove all saved data from sessionStorage
-}
+//     localStorage -> Save indefinetely never expire 
+//     */
+//     // Save element into Array
+//     foods.push(food)
+//         // JSON.stringify -> Array (Object) transform into a string 
+//     sessionStorage.setItem("foods", JSON.stringify(foods))
+
+//     // sessionStorage.removeItem("foods") -> Remove saved data from sessionStorage
+//     // sessionStorage.clear() -> remove all saved data from sessionStorage
+// }
 
 //Function
-const displayFood = (foods) => {
-    const ul = document.createElement("ul")
+// const displayFood = (foods) => {
+//     const ul = document.createElement("ul")
 
-    foodList.textContent = ""
+//     foodList.textContent = ""
 
-    for (let i = 0; i < foods.length; i++) {
-        const li = document.createElement("li")
-        li.textContent = foods[i]
+//     for (let i = 0; i < foods.length; i++) {
+//         const li = document.createElement("li")
+//         li.textContent = foods[i]
 
-        ul.appendChild(li)
-        console.log(foods[i])
-    }
+//         ul.appendChild(li)
+//         console.log(foods[i])
+//     }
 
-    foodList.appendChild(ul)
+//     foodList.appendChild(ul)
 
 
-    inputArrayElement.value = ""
-    inputArrayElement.focus()
-        /* 
-        <div id="foodList">
-            <ul>
-                <li>Beans</li>
-                ...
-            </u>
-        </div>
-        */
-}
+//     inputArrayElement.value = ""
+//     inputArrayElement.focus()
+//         /* 
+//         <div id="foodList">
+//             <ul>
+//                 <li>Beans</li>
+//                 ...
+//             </u>
+//         </div>
+//         */
+// }
 
 //Add element to Array
-function addElementToArray(food) {
-    // // Add food to the Array
-    // foods.push(food)
+// function addElementToArray(food) {
+//     // // Add food to the Array
+//     // foods.push(food)
 
-    // Save Array to Session 
-    saveToArray(food)
+//     // Save Array to Session 
+//     saveToArray(food)
 
-    // Display the elements of the Foods Array
+//     // Display the elements of the Foods Array
 
-    if (sessionStorage.getItem("foods") !== null) {
-        foods = JSON.parse(sessionStorage.getItem("foods"));
+//     if (sessionStorage.getItem("foods") !== null) {
+//         foods = JSON.parse(sessionStorage.getItem("foods"));
 
-        displayFood(foods)
-    }
+//         displayFood(foods)
+//     }
 
 
-}
+// }
 
 //EVENT - CLick
-btnSubmit.addEventListener("click", () => {
-    // food(foods)
-    const food = inputArrayElement.value
+// btnSubmit.addEventListener("click", () => {
+//     // food(foods)
+//     const food = inputArrayElement.value
 
-    /* 
-    - Send value to the function so it can be added to the array
-    - Display the array list 
-    */
+//     /* 
+//     - Send value to the function so it can be added to the array
+//     - Display the array list 
+//     */
 
-    if (foods.indexOf(food) !== -1) {
-        alert("Food already exist!!")
-        inputArrayElement.value = ""
-    } else {
-        //Call the function addElementToArray 
-        addElementToArray(food)
-    }
+//     if (foods.indexOf(food) !== -1) {
+//         alert("Food already exist!!")
+//         inputArrayElement.value = ""
+//     } else {
+//         //Call the function addElementToArray 
+//         addElementToArray(food)
+//     }
 
-})
+// })
 
 // When page load
 // if (sessionStorage.getItem("foods") !== null) {
@@ -602,41 +602,41 @@ myFunction()
 // let surface = longeur * largeur
 
 //EMMAK
-const inputLargeur = document.querySelector("#inputLargeur")
-const inputLongeur = document.querySelector("#inputLongeur")
-const buttonCalculate = document.querySelector("#buttonCalculate")
-const surfaceResult = document.querySelector("#surfaceResult")
+// const inputLargeur = document.querySelector("#inputLargeur")
+// const inputLongeur = document.querySelector("#inputLongeur")
+// const buttonCalculate = document.querySelector("#buttonCalculate")
+// const surfaceResult = document.querySelector("#surfaceResult")
 
-function calculateSurface(longeur, largeur) {
-    return longeur * largeur
-}
+// function calculateSurface(longeur, largeur) {
+//     return longeur * largeur
+// }
 
-buttonCalculate.addEventListener("click", () => {
+// buttonCalculate.addEventListener("click", () => {
 
-    let longeur = parseInt(inputLongeur.value)
-    let largeur = parseInt(inputLargeur.value)
-    let dimension = {
-        "longeur": longeur,
-        "largeur": largeur,
-        "surface": surface
-    }
+//     let longeur = parseInt(inputLongeur.value)
+//     let largeur = parseInt(inputLargeur.value)
+//     let dimension = {
+//         "longeur": longeur,
+//         "largeur": largeur,
+//         "surface": surface
+//     }
 
-    if (!isNaN(largeur) && !isNaN(longeur)) {
-        let surface = calculateSurface(longeur, largeur)
+//     if (!isNaN(largeur) && !isNaN(longeur)) {
+//         let surface = calculateSurface(longeur, largeur)
 
-        surfaceResult.textContent = surface
-        console.log('surface', surface)
-    } else {
+//         surfaceResult.textContent = surface
+//         console.log('surface', surface)
+//     } else {
 
-        alert("Only numbers allowed!!")
-    }
+//         alert("Only numbers allowed!!")
+//     }
 
-    // Reset value
-    inputLargeur.value = ""
-    inputLongeur.value = ""
+//     // Reset value
+//     inputLargeur.value = ""
+//     inputLongeur.value = ""
 
-    inputLongeur.focus()
-})
+//     inputLongeur.focus()
+// })
 
 
 
@@ -689,16 +689,117 @@ Iddi, Rajab, Willy
 */
 
 
+// LOOPS
+
+// const myFood = ["Chicken", "Fish", "Lion"]
+// const myObjectArray = [{
+//     largeur: 20,
+//     longeur: 20,
+//     surface: 400
+// }]
 
 
 
+// For loop 
+
+// for (let i = 0; i < myFood.length; i++) {
+//     const chakula = myFood[i]
+//     console.log(chakula)
+// }
+
+// MAP -> loop through array, modified the array if needs too, check if the index of array 
+// myFood.map((element, index) => {
+//     // const chakula = food
+
+//     console.log(chakula)
+// })
+
+// myObjectArray.map(({ longeur, largeur, surface }) => {
+
+//     console.log(`longeur ${longeur} largeur ${largeur} surface ${surface}`)
+// })
+
+// const numbers = [1, 2, 3, 4]
+
+// console.log('numbers--->original', numbers)
+// const myNewNumberArray = numbers.map((number) => {
+//     return number * 2
+// })
 
 
+// console.log("modified--->", myNewNumberArray)
+
+// const index = numbers.map((number) => number).indexOf(6)
+// const index = numbers.indexOf(2)
+// console.log("index", index)
 
 
+const courseArray = ["Math", "Bio"]
+
+const studentsArray = [{
+        firstName: "Yunus",
+        lastName: "Ibrahim",
+        courseName: ["Math", "Bio"]
+    },
+    {
+        firstName: "Emma",
+        lastName: "Kabale",
+        courseName: ["Math"]
+    }
+]
+
+// courseArray.map((course) => {
+
+//     console.log(course)
+// })
+
+const studentsList = document.querySelector("#studentsList")
+    // we can use object destructuring (extract property of an object) them so we can access them easely 
+studentsArray.map(({ firstName, lastName, courseName }) => {
+    // console.log(firstName, lastName, courseName)
+    const studentLi = document.createElement("li")
+    const firstNameP = document.createElement("p")
+    const lastNameP = document.createElement("p")
+    const courseP = document.createElement("p")
+    const courseUl = document.createElement("ul")
+    const breakSpace = document.createElement("br")
+
+    firstNameP.textContent = `First Name: ${firstName}`
+    lastNameP.textContent = `Last Name: ${lastName}`
+    courseP.textContent = "Courses:"
 
 
+    // studentsList.innerHTML = `
+    // <p>First Name: ${firstName}</p>
+    // <p>Last Name: ${lastName} </p>
+    // <ul>
+    // ${courseName.map((course) => `
+    //     <li>${course}</li>
+    // `)}
+    // </ul>
+    // `
 
+
+    studentLi.appendChild(firstNameP)
+    studentLi.appendChild(lastNameP)
+    studentLi.appendChild(courseP)
+    studentLi.appendChild(breakSpace)
+
+    courseName.map((course) => {
+        const courseLi = document.createElement("li")
+
+        courseLi.textContent = course
+
+        courseUl.appendChild(courseLi)
+    })
+
+    courseP.appendChild(courseUl)
+    studentsList.appendChild(studentLi)
+})
+
+// const index = courseArray.map((course) => course).indexOf("Bio")
+// const index = courseArray.indexOf("Math")
+// console.log('index', index)
 
 
 
