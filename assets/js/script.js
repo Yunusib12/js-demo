@@ -655,12 +655,9 @@ Boolean
 Object
 Number
 
-
 REFERENCE ELEMENTS
 
-
 EVENTS
-
 
 FUNCTIONS
 Rajab, Willy
@@ -668,7 +665,9 @@ Rajab, Willy
 SESSION
 Iddi, Rajab, Willy
 
-
+LOOP
+for
+map
 
 */
 
@@ -755,7 +754,11 @@ const studentsArray = [{
 
 const studentsList = document.querySelector("#studentsList")
     // we can use object destructuring (extract property of an object) them so we can access them easely 
-studentsArray.map(({ firstName, lastName, courseName }) => {
+studentsArray.map(({ firstName, lastName, courseName }, index) => {
+
+    if (index % 2 !== 0) {
+
+    }
     // console.log(firstName, lastName, courseName)
     const studentLi = document.createElement("li")
     const firstNameP = document.createElement("p")
@@ -801,10 +804,48 @@ studentsArray.map(({ firstName, lastName, courseName }) => {
 // const index = courseArray.indexOf("Math")
 // console.log('index', index)
 
+let numberOne // value undefined -> type undefined 
+let numberTwo = null //value empty -> type object
+let numberThree = 0 // value zero -> type number
 
+console.log(typeof(numberOne), typeof(numberTwo), typeof(numberThree))
 
+/* Create a form (add a new student to a class)
 
+- heading -> Add a new student
+- inputs
+  - First name
+  - Last name
+  - Phone number
+  - Email
+  - Class Name (Select -> dynamic)
+  - buttons -> submit / cancel
 
+===> Once the form is submited
+- Save the student into the class array
+- Save the class array into the session
+- Display the list of student in the class
+- Once clicked on the specific stundent display student information
+
+CA
+===
+- Form need to be secured (can't send empty value) and styled
+- Display student list in a class (Student full name - Phone number )
+    eg: Class list "Coding"
+        Emma Kabale - 79 000 000
+        Iddi Juma   - 77 000 000
+
+       Class List "Design"
+       Emma Kabale - 79 000 000
+       Zai Ndizeye - 75 000 000
+
+- Display student information on the page once clicked (First name, Last name, Phone number, Email)
+    eg: Fisrt name: Emma
+        Last name:  Kabale
+        Phone number: 79 000 000
+        Email: emmak@afriticgroup.com
+
+*/
 
 
 
