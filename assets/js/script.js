@@ -457,14 +457,14 @@
 
 // // SAve to SessionStorage / LocalStorage
 // function saveToArray(food) {
-//     /* Save array to 
+//     /* Save array to
 //     sessionStorage -> Save temporary expire when session ends
 
-//     localStorage -> Save indefinetely never expire 
+//     localStorage -> Save indefinetely never expire
 //     */
 //     // Save element into Array
 //     foods.push(food)
-//         // JSON.stringify -> Array (Object) transform into a string 
+//         // JSON.stringify -> Array (Object) transform into a string
 //     sessionStorage.setItem("foods", JSON.stringify(foods))
 
 //     // sessionStorage.removeItem("foods") -> Remove saved data from sessionStorage
@@ -490,7 +490,7 @@
 
 //     inputArrayElement.value = ""
 //     inputArrayElement.focus()
-//         /* 
+//         /*
 //         <div id="foodList">
 //             <ul>
 //                 <li>Beans</li>
@@ -505,7 +505,7 @@
 //     // // Add food to the Array
 //     // foods.push(food)
 
-//     // Save Array to Session 
+//     // Save Array to Session
 //     saveToArray(food)
 
 //     // Display the elements of the Foods Array
@@ -524,16 +524,16 @@
 //     // food(foods)
 //     const food = inputArrayElement.value
 
-//     /* 
+//     /*
 //     - Send value to the function so it can be added to the array
-//     - Display the array list 
+//     - Display the array list
 //     */
 
 //     if (foods.indexOf(food) !== -1) {
 //         alert("Food already exist!!")
 //         inputArrayElement.value = ""
 //     } else {
-//         //Call the function addElementToArray 
+//         //Call the function addElementToArray
 //         addElementToArray(food)
 //     }
 
@@ -699,14 +699,14 @@ map
 
 
 
-// For loop 
+// For loop
 
 // for (let i = 0; i < myFood.length; i++) {
 //     const chakula = myFood[i]
 //     console.log(chakula)
 // }
 
-// MAP -> loop through array, modified the array if needs too, check if the index of array 
+// MAP -> loop through array, modified the array if needs too, check if the index of array
 // myFood.map((element, index) => {
 //     // const chakula = food
 
@@ -733,82 +733,129 @@ map
 // console.log("index", index)
 
 
-const courseArray = ["Math", "Bio"]
+// const courseArray = ["Math", "Bio"]
 
-const studentsArray = [{
-        firstName: "Yunus",
-        lastName: "Ibrahim",
-        courseName: ["Math", "Bio"]
-    },
-    {
-        firstName: "Emma",
-        lastName: "Kabale",
-        courseName: ["Math"]
-    }
-]
+// const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+// const oddNumbers = numbers.filter((number) => number % 2 == 1)
+
+// console.log('oddNumbers', oddNumbers)
+
+// const studentsArray = [{
+//         firstName: "Yunus",
+//         lastName: "Ibrahim",
+//         courseName: ["Math", "Bio"]
+//     },
+//     {
+//         firstName: "Emma",
+//         lastName: "Kabale",
+//         courseName: ["Math"]
+//     }
+// ]
+
+// const name = studentsArray.map(({ firstName, lastName, courseName }, index) => {
+
+
+
+// })
+
+// const classArray = [{
+//         name: "IT",
+//         year: 2022,
+//     },
+//     {
+//         name: "Coding",
+//         year: 2022
+//     }
+// ]
+
+// const addClass = (classObject) => {
+//     const { name, year } = classObject;
+
+//     // not destructuring the folowing object
+//     const classIndex = classArray.findIndex((classInfo) => {
+
+//         if (classInfo.name === name && classInfo.year === year) {
+//             return true
+//         }
+
+//         return false
+//     })
+
+//     console.log('classIndex', classIndex)
+
+//     // if the class does not exist add it to the array
+//     if (classIndex === -1) {
+//         classArray.push(classObject)
+//     }
+// }
+
+// addClass({ name: "Coding", year: 2023 })
+
+// console.log('classArray', classArray)
 
 // courseArray.map((course) => {
 
 //     console.log(course)
 // })
 
-const studentsList = document.querySelector("#studentsList")
-    // we can use object destructuring (extract property of an object) them so we can access them easely 
-studentsArray.map(({ firstName, lastName, courseName }, index) => {
+// const studentsList = document.querySelector("#studentsList")
+// we can use object destructuring (extract property of an object) them so we can access them easely
+// studentsArray.map(({ firstName, lastName, courseName }, index) => {
 
-    if (index % 2 !== 0) {
+//     if (index % 2 !== 0) {
 
-    }
-    // console.log(firstName, lastName, courseName)
-    const studentLi = document.createElement("li")
-    const firstNameP = document.createElement("p")
-    const lastNameP = document.createElement("p")
-    const courseP = document.createElement("p")
-    const courseUl = document.createElement("ul")
-    const breakSpace = document.createElement("br")
+//     }
+//     // console.log(firstName, lastName, courseName)
+//     const studentLi = document.createElement("li")
+//     const firstNameP = document.createElement("p")
+//     const lastNameP = document.createElement("p")
+//     const courseP = document.createElement("p")
+//     const courseUl = document.createElement("ul")
+//     const breakSpace = document.createElement("br")
 
-    firstNameP.textContent = `First Name: ${firstName}`
-    lastNameP.textContent = `Last Name: ${lastName}`
-    courseP.textContent = "Courses:"
-
-
-    // studentsList.innerHTML = `
-    // <p>First Name: ${firstName}</p>
-    // <p>Last Name: ${lastName} </p>
-    // <ul>
-    // ${courseName.map((course) => `
-    //     <li>${course}</li>
-    // `)}
-    // </ul>
-    // `
+//     firstNameP.textContent = `First Name: ${firstName}`
+//     lastNameP.textContent = `Last Name: ${lastName}`
+//     courseP.textContent = "Courses:"
 
 
-    studentLi.appendChild(firstNameP)
-    studentLi.appendChild(lastNameP)
-    studentLi.appendChild(courseP)
-    studentLi.appendChild(breakSpace)
+//     // studentsList.innerHTML = `
+//     // <p>First Name: ${firstName}</p>
+//     // <p>Last Name: ${lastName} </p>
+//     // <ul>
+//     // ${courseName.map((course) => `
+//     //     <li>${course}</li>
+//     // `)}
+//     // </ul>
+//     // `
 
-    courseName.map((course) => {
-        const courseLi = document.createElement("li")
 
-        courseLi.textContent = course
+//     studentLi.appendChild(firstNameP)
+//     studentLi.appendChild(lastNameP)
+//     studentLi.appendChild(courseP)
+//     studentLi.appendChild(breakSpace)
 
-        courseUl.appendChild(courseLi)
-    })
+//     courseName.map((course) => {
+//         const courseLi = document.createElement("li")
 
-    courseP.appendChild(courseUl)
-    studentsList.appendChild(studentLi)
-})
+//         courseLi.textContent = course
 
-// const index = courseArray.map((course) => course).indexOf("Bio")
-// const index = courseArray.indexOf("Math")
-// console.log('index', index)
+//         courseUl.appendChild(courseLi)
+//     })
 
-let numberOne // value undefined -> type undefined 
-let numberTwo = null //value empty -> type object
-let numberThree = 0 // value zero -> type number
+//     courseP.appendChild(courseUl)
+//     studentsList.appendChild(studentLi)
+// })
 
-console.log(typeof(numberOne), typeof(numberTwo), typeof(numberThree))
+// // const index = courseArray.map((course) => course).indexOf("Bio")
+// // const index = courseArray.indexOf("Math")
+// // console.log('index', index)
+
+// let numberOne // value undefined -> type undefined
+// let numberTwo = null //value empty -> type object
+// let numberThree = 0 // value zero -> type number
+
+// console.log(typeof(numberOne), typeof(numberTwo), typeof(numberThree))
 
 /* Create a form (add a new student to a class)
 
@@ -844,8 +891,53 @@ CA
         Last name:  Kabale
         Phone number: 79 000 000
         Email: emmak@afriticgroup.com
+        classes: ["Coding"]
 
 */
+// Reference
+const STUDENT_LIST_REF = document.querySelector("#studentsList")
+
+// Student List Array
+const studentListArray = [{
+    studentName: "Willy",
+    age: 18,
+}, {
+    studentName: "Rajab",
+    age: 18,
+}, {
+    studentName: "Emmak",
+    age: 18,
+}, {
+    studentName: "Zai",
+    age: 18,
+}]
+
+// Loop throug array and display content table
+
+studentListArray.map((student) => {
+
+    const { studentName, age } = student
+
+    // const studentListTR = document.createElement("tr")
+    // const studentListTDStudentName = document.createElement("td")
+    // const studentListTDStudentAge = document.createElement("td")
+
+    // studentListTDStudentName.textContent = studentName
+    // studentListTDStudentAge.textContent = age
+
+
+    // studentListTR.append(studentListTDStudentName, studentListTDStudentAge)
+
+    // STUDENT_LIST_REF.appendChild(studentListTR)
+
+    STUDENT_LIST_REF.innerHTML += `
+        <tr>
+            <td>${studentName}</td>
+            <td>${age}</td>
+        </tr>
+    `
+})
+
 
 
 
