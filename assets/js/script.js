@@ -914,29 +914,46 @@ const studentListArray = [{
 
 // Loop throug array and display content table
 
-studentListArray.map((student) => {
+// studentListArray.map((student) => {
 
-    const { studentName, age } = student
+//     const { studentName, age } = student
 
-    // const studentListTR = document.createElement("tr")
-    // const studentListTDStudentName = document.createElement("td")
-    // const studentListTDStudentAge = document.createElement("td")
+//     // const studentListTR = document.createElement("tr")
+//     // const studentListTDStudentName = document.createElement("td")
+//     // const studentListTDStudentAge = document.createElement("td")
 
-    // studentListTDStudentName.textContent = studentName
-    // studentListTDStudentAge.textContent = age
+//     // studentListTDStudentName.textContent = studentName
+//     // studentListTDStudentAge.textContent = age
 
 
-    // studentListTR.append(studentListTDStudentName, studentListTDStudentAge)
+//     // studentListTR.append(studentListTDStudentName, studentListTDStudentAge)
 
-    // STUDENT_LIST_REF.appendChild(studentListTR)
+//     // STUDENT_LIST_REF.appendChild(studentListTR)
 
-    STUDENT_LIST_REF.innerHTML += `
-        <tr>
-            <td>${studentName}</td>
-            <td>${age}</td>
-        </tr>
-    `
-})
+//     STUDENT_LIST_REF.innerHTML += `
+//         <tr>
+//             <td>${studentName}</td>
+//             <td>${age}</td>
+//         </tr>
+//     `
+// })
+
+// const students = ['Rajab', 'Emmak', 'Willy']
+
+// const [firstStudent, secondStudent, thirdStudent] = students
+
+// console.log(firstStudent, secondStudent, thirdStudent)
+
+// for (let i = 0; i < studentListArray.length; i++) {
+//     const { studentName, age } = studentListArray[i];
+
+//     STUDENT_LIST_REF.innerHTML += `
+//         <tr>
+//             <td>${studentName}</td>
+//             <td>${age}</td>
+//         </tr>
+//     `
+// }
 
 
 
@@ -1040,3 +1057,129 @@ studentListArray.map((student) => {
 // }
 
 // timer()
+
+
+/*
+C R U D (DATA)
+Create -> add data kwenye DB, Array, Session (Form) 
+
+Read -> Read? and Display data from DB, Array[{}], Session  
+
+Update -> Edit existing data DB, Array[{}], Session
+
+Delete -> Remove existing data BD, Array[{}], Session // Update field Deleted On ... (Archive)
+
+*/
+// Global Variables 
+let CLASS_ARRAY = []
+let STUDENT_ARRAY = []
+const CLASS_ARRAY_STORAGE_KEY = "classArray"
+const STUDENT_ARRAY_STORAGE_KEY = 'studentArray'
+let CLASS_ARRAY_SIZE = 0
+let STORAGE_KEY = ""
+
+// Reference
+const btnDisplayFormRef = document.querySelector("#btnDisplayForm")
+const formClassRef = document.querySelector("#formClass")
+const classNameRef = document.querySelector("#className")
+const classYearRef = document.querySelector("#classYear")
+const classSizeRef = document.querySelector("#classSize")
+const btnAddClassRef = document.querySelector("#btnAddClass")
+const addClassFormRef = document.querySelector("#addClassForm")
+
+
+// FUNCTIONS
+
+// Get data from storage 
+const getDataFromStorage = (STORAGE_KEY) => {
+    if (localStorage.getItem(STORAGE_KEY) !== null) {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY))
+    }
+
+    return null
+}
+
+// Save data to Storage
+const saveDataToStorage = (STORAGE_KEY, arrayData, data) => {
+    // Add class to Array
+    arrayData.push(data)
+
+    // Save Array to Storage (Session / Local)
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(arrayData))
+}
+
+// Save Class Info
+const saveClass = (classInfo) => {
+    // Check if a class with the same name and year exist 
+    // CASE 1 -> when the storage is empty
+    if (localStorage.getItem(CLASS_ARRAY_STORAGE_KEY) === null) {
+        saveDataToStorage(CLASS_ARRAY_STORAGE_KEY, CLASS_ARRAY, classInfo)
+
+    } else {
+        // CASE 2 -> when the storage is not empty
+        let classArray = getDataFromStorage(CLASS_ARRAY_STORAGE_KEY)
+
+        if (classArray !== null) {
+            // Add classInfo to Array
+            const { name, year } = classInfo
+            const classIndex = classArray.findIndex((classInfo, index) => classInfo.name === name && classInfo.year === year)
+
+            if (classIndex === -1) {
+                saveDataToStorage(CLASS_ARRAY_STORAGE_KEY, CLASS_ARRAY, classInfo)
+            } else {
+                alert(`The Class Name ${name} and Year ${year} exist!!`)
+            }
+        }
+    }
+}
+
+// Initialize  DATA 
+const dataInitialization = () => {
+    // Initialize class data 
+    let classArray = getDataFromStorage(CLASS_ARRAY_STORAGE_KEY)
+
+    if (classArray !== null) {
+        CLASS_ARRAY = classArray
+    }
+
+    // Initialize Student data
+}
+
+// EVENTS
+btnAddClassRef.addEventListener("click", (e) => {
+    e.preventDefault()
+    const classNameValue = classNameRef.value
+    const classYearValue = classYearRef.value
+    const classSizeValue = classSizeRef.value
+
+    // Get Class array from Store 
+    const classArray = getDataFromStorage(CLASS_ARRAY_STORAGE_KEY)
+    console.log('classArray', classArray)
+        // update class array size variable 
+        // CLASS_ARRAY_SIZE = classArray !== null ? classArray.length : 0
+    if (classArray !== null) {
+        CLASS_ARRAY_SIZE = classArray.length
+    }
+
+    // Class Object 
+    const classInfo = {
+        id: CLASS_ARRAY_SIZE + 1,
+        name: classNameValue,
+        year: classYearValue,
+        size: classSizeValue,
+    }
+
+    // Save Class info 
+    saveClass(classInfo)
+
+    // Clear form
+    addClassFormRef.reset()
+})
+
+// Unhide Class form 
+btnDisplayFormRef.addEventListener("click", () => {
+    formClassRef.classList.toggle("hide")
+})
+
+// APP init
+dataInitialization()

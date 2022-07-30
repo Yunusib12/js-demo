@@ -18,3 +18,15 @@
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
 }
+
+.add-space-bottom {
+    margin-bottom: 1rem;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
