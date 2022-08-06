@@ -1078,7 +1078,8 @@ const STUDENT_ARRAY_STORAGE_KEY = 'studentArray'
 let CLASS_ARRAY_SIZE = 0
 let STORAGE_KEY = ""
 
-// Reference
+// References
+// Class
 const btnDisplayFormRef = document.querySelector("#btnDisplayForm")
 const formClassRef = document.querySelector("#formClass")
 const classNameRef = document.querySelector("#className")
@@ -1087,6 +1088,15 @@ const classSizeRef = document.querySelector("#classSize")
 const btnAddClassRef = document.querySelector("#btnAddClass")
 const addClassFormRef = document.querySelector("#addClassForm")
 
+// Student
+const bntDisplaytudentFormRef = document.querySelector("#bntDisplaytudentForm")
+const formStudentRef = document.querySelector("#formStudent")
+const addStudentFormRef = document.querySelector("#addStudentForm")
+const firstNameRef = document.querySelector("#firstName")
+const lastNameRef = document.querySelector("#lastName")
+const emailRef = document.querySelector("#email")
+const phoneNumberRef = document.querySelector("#phoneNumber")
+const btnEnrollStudentRef = document.querySelector("#btnEnrollStudent")
 
 // FUNCTIONS
 
@@ -1101,7 +1111,7 @@ const getDataFromStorage = (STORAGE_KEY) => {
 
 // Save data to Storage
 const saveDataToStorage = (STORAGE_KEY, arrayData, data) => {
-    // Add class to Array
+    // Add data to Array
     arrayData.push(data)
 
     // Save Array to Storage (Session / Local)
@@ -1110,22 +1120,83 @@ const saveDataToStorage = (STORAGE_KEY, arrayData, data) => {
 
 // Save Class Info
 const saveClass = (classInfo) => {
-    // Check if a class with the same name and year exist 
+        // Check if a class with the same name and year exist 
+        // CASE 1 -> when the storage is empty
+        if (localStorage.getItem(CLASS_ARRAY_STORAGE_KEY) === null) {
+            saveDataToStorage(CLASS_ARRAY_STORAGE_KEY, CLASS_ARRAY, classInfo)
+
+        } else {
+            // CASE 2 -> when the storage is not empty
+            let classArray = getDataFromStorage(CLASS_ARRAY_STORAGE_KEY)
+
+            if (classArray !== null) {
+                // Add classInfo to Array
+                const { name, year } = classInfo
+                const classIndex = classArray.findIndex((classData) =>
+                    classData.name === name && classData.year === year)
+
+                if (classIndex === -1) {
+                    saveDataToStorage(CLASS_ARRAY_STORAGE_KEY, CLASS_ARRAY, classInfo)
+                } else {
+                    alert(`The Class Name ${name} and Year ${year} exist!!`)
+                }
+            }
+        }
+    }
+    /* STEPS TO CHANGE A FUNCTION FROM A SEPEFIC ONE TO A GLOBAL ONE 
+        -> Function name 
+        -> Similarities / Differencies (Need to return data??) 
+        -> Parameters / properties
+        -> REFACTORING (Keep It Simple Stupid / Do not Repeat Yourself)
+    */
+
+// get Index 
+// const getIndex = (array, )
+
+const saveData = (ARRAY_STORAGE_KEY, ARRAY_DATA, data, dataCallback) => {
+    // Check if a student with the same name and year exist 
     // CASE 1 -> when the storage is empty
-    if (localStorage.getItem(CLASS_ARRAY_STORAGE_KEY) === null) {
-        saveDataToStorage(CLASS_ARRAY_STORAGE_KEY, CLASS_ARRAY, classInfo)
+    console.log('dataCallback', dataCallback)
+    if (localStorage.getItem(ARRAY_STORAGE_KEY) === null) {
+        saveDataToStorage(ARRAY_STORAGE_KEY, ARRAY_DATA, data)
 
     } else {
         // CASE 2 -> when the storage is not empty
-        let classArray = getDataFromStorage(CLASS_ARRAY_STORAGE_KEY)
+        let arrayData = getDataFromStorage(ARRAY_STORAGE_KEY)
 
-        if (classArray !== null) {
-            // Add classInfo to Array
-            const { name, year } = classInfo
-            const classIndex = classArray.findIndex((classInfo, index) => classInfo.name === name && classInfo.year === year)
+        if (arrayData !== null) {
+            // Add data to Array
+            // const { name, year } = data
+            const dataIndex = arrayData.findIndex(dataCallback)
 
-            if (classIndex === -1) {
-                saveDataToStorage(CLASS_ARRAY_STORAGE_KEY, CLASS_ARRAY, classInfo)
+            if (dataIndex === -1) {
+                saveDataToStorage(ARRAY_STORAGE_KEY, ARRAY_DATA, data)
+            } else {
+                alert(`The data exist!!`)
+            }
+        }
+    }
+}
+
+
+// Save Student Info
+const saveStudent = (studentInfo) => {
+    // Check if a student with the same name and year exist 
+    // CASE 1 -> when the storage is empty
+    if (localStorage.getItem(STUDENT_ARRAY_STORAGE_KEY) === null) {
+        saveDataToStorage(STUDENT_ARRAY_STORAGE_KEY, STUDENT_ARRAY, studentInfo)
+
+    } else {
+        // CASE 2 -> when the storage is not empty
+        let studentArray = getDataFromStorage(STUDENT_ARRAY_STORAGE_KEY)
+
+        if (studentArray !== null) {
+            // Add studentInfo to Array
+            const { name, year } = studentInfo
+            const studentIndex = studentArray.findIndex((studentData) => studentData.name === name && studentData.year === year)
+
+            if (studentIndex === -1) {
+                saveDataToStorage(STUDENT_ARRAY_STORAGE_KEY, STUDENT_ARRAY, studentInfo)
             } else {
                 alert(`The Class Name ${name} and Year ${year} exist!!`)
             }
@@ -1169,8 +1240,11 @@ btnAddClassRef.addEventListener("click", (e) => {
         size: classSizeValue,
     }
 
+    // const myFunc = (classData) => classData.name === data.name && classData.year === data.year
+
     // Save Class info 
-    saveClass(classInfo)
+    // saveClass(classInfo)
+    saveData(CLASS_ARRAY_STORAGE_KEY, CLASS_ARRAY, classInfo, "(classData) => classData.name === data.name && classData.year === data.year")
 
     // Clear form
     addClassFormRef.reset()

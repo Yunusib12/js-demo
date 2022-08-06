@@ -72,6 +72,7 @@
            -> Year
            -> Size
         -->
+        <!--Add Class Form -->
         <button id="btnDisplayForm" class="display-form add-space-bottom">Add Class</button>
         <div id="formClass" class="add-space-bottom hide">
             <h2 class="class-heading add-space-bottom">Class Form </h2>
@@ -88,7 +89,34 @@
                     <label for="classSize">Size</label>
                     <input type="number" id="classSize" value="" placeholder="Class Size here..." required />
                 </div>
-                <button type="submit" id="btnAddClass">Add Class</button>
+                <button type="submit" id="btnAddClass">Save</button>
+                <!-- <button type="reset">Reset</button> -->
+                <button>Cancel</button>
+            </form>
+        </div>
+
+        <!--Enroll Student Form -->
+        <button id="bntDisplaytudentForm" class="display-form add-space-bottom">Enroll Student</button>
+        <div id="formStudent" class="add-space-bottom hide">
+            <h2 class="class-heading add-space-bottom">Enroll Student Form </h2>
+            <form id="addStudentForm">
+                <div class="add-space-bottom">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" value="" placeholder="First Name here..." required />
+                </div>
+                <div class="add-space-bottom">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" value="" placeholder="Last Name here..." required />
+                </div>
+                <div class="add-space-bottom">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" value="" placeholder="Email here..." required />
+                </div>
+                <div class="add-space-bottom">
+                    <label for="phoneNumber">Phone number</label>
+                    <input type="number" id="phoneNumber" value="" placeholder="Class Phone number here..." required />
+                </div>
+                <button type="submit" id="btnEnrollStudent">Enroll</button>
                 <!-- <button type="reset">Reset</button> -->
                 <button>Cancel</button>
             </form>
