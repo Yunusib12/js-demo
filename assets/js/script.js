@@ -1076,6 +1076,7 @@ let STUDENT_ARRAY = []
 const CLASS_ARRAY_STORAGE_KEY = "classArray"
 const STUDENT_ARRAY_STORAGE_KEY = 'studentArray'
 let CLASS_ARRAY_SIZE = 0
+let STUDENT_ARRAY_SIZE = 0
 let STORAGE_KEY = ""
 
 // References
@@ -1097,6 +1098,9 @@ const lastNameRef = document.querySelector("#lastName")
 const emailRef = document.querySelector("#email")
 const phoneNumberRef = document.querySelector("#phoneNumber")
 const btnEnrollStudentRef = document.querySelector("#btnEnrollStudent")
+const classListRef = document.querySelector("#classList")
+
+
 
 // FUNCTIONS
 
@@ -1218,8 +1222,26 @@ const dataInitialization = () => {
     // Initialize Student data
 }
 
+// Display Class list 
+const displayClassList = () => {
+    // Get the class List from the local Storage 
+    let classArray = getDataFromStorage(CLASS_ARRAY_STORAGE_KEY)
+    const divClassContainer = document.createElement("div")
+
+    classArray.map(({ id, name }) => {
+        divClassContainer.innerHTML += `
+        <div>
+            <input type="checkbox" value="${id}">
+            <label >${name}</label>
+         </div>
+         `
+    })
+
+    classListRef.appendChild(divClassContainer)
+}
+
 // EVENTS
-btnAddClassRef.addEventListener("click", (e) => {
+addClassFormRef.addEventListener("submit", (e) => {
     e.preventDefault()
     const classNameValue = classNameRef.value
     const classYearValue = classYearRef.value
@@ -1251,10 +1273,68 @@ btnAddClassRef.addEventListener("click", (e) => {
     addClassFormRef.reset()
 })
 
+// Enroll students 
+addStudentFormRef.addEventListener("submit", (e) => {
+    e.preventDefault()
+
+    const firstNameValue = firstNameRef.value
+    const lastNameValue = lastNameRef.value
+    const emailValue = emailRef.value
+    const phoneNumberValue = phoneNumberRef.value
+
+    // Get Student array from LocalStorage 
+    const studentArray = getDataFromStorage(STUDENT_ARRAY_STORAGE_KEY)
+    console.log('studentArray', studentArray)
+
+    // update class array size variable 
+    if (studentArray !== null) {
+        STUDENT_ARRAY_SIZE = studentArray.length
+    }
+
+    // Student Object 
+    let studentInfo = {
+        id: STUDENT_ARRAY_SIZE + 1,
+        firstName: firstNameValue,
+        lastName: lastNameValue,
+        email: emailValue,
+        phoneNumber: phoneNumberValue,
+        classList: [],
+    }
+
+    const arguments = (studentData) => studentData.email === studentInfo.email && studentData.phoneNumber === studentInfo.phoneNumber
+
+    // Save Student Info
+    saveData(STUDENT_ARRAY_STORAGE_KEY, STUDENT_ARRAY, studentInfo, arguments)
+
+    // Clear form 
+    addStudentFormRef.reset()
+})
+
+
+
 // Unhide Class form 
 btnDisplayClassFormRef.addEventListener("click", () => {
     formClassRef.classList.toggle("hide")
 })
+
+// Unhide / Show Student form 
+bntDisplaytudentFormRef.addEventListener("click", () => {
+
+    displayClassList()
+
+    formStudentRef.classList.toggle("hide")
+
+    // setTimeout(() => {
+    //     console.log("inside timeout")
+    //     formStudentRef.classList.toggle("hide")
+    // }, 2000);
+
+    // setInterval(() => {
+    //     console.log("every-second")
+    // }, 1000);
+
+})
+
 
 // APP init
 dataInitialization()
