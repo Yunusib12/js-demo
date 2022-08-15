@@ -1269,7 +1269,7 @@ addClassFormRef.addEventListener("submit", (e) => {
     // Save Class info 
     saveData(CLASS_ARRAY_STORAGE_KEY, CLASS_ARRAY, classInfo, arguments)
 
-    // Clear form
+    //Clear form
     addClassFormRef.reset()
 })
 
@@ -1281,33 +1281,45 @@ addStudentFormRef.addEventListener("submit", (e) => {
     const lastNameValue = lastNameRef.value
     const emailValue = emailRef.value
     const phoneNumberValue = phoneNumberRef.value
+    const classListCheckboxes = document.querySelectorAll('input[type=checkbox]:checked')
+    const checkboxesArrayLength = classListCheckboxes.length
 
-    // Get Student array from LocalStorage 
-    const studentArray = getDataFromStorage(STUDENT_ARRAY_STORAGE_KEY)
-    console.log('studentArray', studentArray)
+    // Check if a class was selected 
+    if (checkboxesArrayLength > 0) {
 
-    // update class array size variable 
-    if (studentArray !== null) {
-        STUDENT_ARRAY_SIZE = studentArray.length
+        // Get Student array from LocalStorage 
+        const studentArray = getDataFromStorage(STUDENT_ARRAY_STORAGE_KEY)
+
+
+        // update class array size variable 
+        if (studentArray !== null) {
+            STUDENT_ARRAY_SIZE = studentArray.length
+        }
+
+        // Student Object 
+        let studentInfo = {
+            id: STUDENT_ARRAY_SIZE + 1,
+            firstName: firstNameValue,
+            lastName: lastNameValue,
+            email: emailValue,
+            phoneNumber: phoneNumberValue,
+            classList: [],
+        }
+
+        // Get Selected Class value
+        classListCheckboxes.forEach((checkbox) => studentInfo.classList.push(checkbox.value))
+
+        const arguments = (studentData) => studentData.email === studentInfo.email && studentData.phoneNumber === studentInfo.phoneNumber
+
+        // Save Student Info
+        saveData(STUDENT_ARRAY_STORAGE_KEY, STUDENT_ARRAY, studentInfo, arguments)
+
+        // Clear form 
+        addStudentFormRef.reset()
+
+    } else {
+        alert("Please select at least one class!")
     }
-
-    // Student Object 
-    let studentInfo = {
-        id: STUDENT_ARRAY_SIZE + 1,
-        firstName: firstNameValue,
-        lastName: lastNameValue,
-        email: emailValue,
-        phoneNumber: phoneNumberValue,
-        classList: [],
-    }
-
-    const arguments = (studentData) => studentData.email === studentInfo.email && studentData.phoneNumber === studentInfo.phoneNumber
-
-    // Save Student Info
-    saveData(STUDENT_ARRAY_STORAGE_KEY, STUDENT_ARRAY, studentInfo, arguments)
-
-    // Clear form 
-    addStudentFormRef.reset()
 })
 
 
