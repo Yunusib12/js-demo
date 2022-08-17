@@ -895,22 +895,22 @@ CA
 
 */
 // Reference
-const STUDENT_LIST_REF = document.querySelector("#studentsList")
+// const STUDENT_LIST_REF = document.querySelector("#studentsList")
 
-// Student List Array
-const studentListArray = [{
-    studentName: "Willy",
-    age: 18,
-}, {
-    studentName: "Rajab",
-    age: 18,
-}, {
-    studentName: "Emmak",
-    age: 18,
-}, {
-    studentName: "Zai",
-    age: 18,
-}]
+// // Student List Array
+// const studentListArray = [{
+//     studentName: "Willy",
+//     age: 18,
+// }, {
+//     studentName: "Rajab",
+//     age: 18,
+// }, {
+//     studentName: "Emmak",
+//     age: 18,
+// }, {
+//     studentName: "Zai",
+//     age: 18,
+// }]
 
 // Loop throug array and display content table
 
@@ -1088,6 +1088,7 @@ const classYearRef = document.querySelector("#classYear")
 const classSizeRef = document.querySelector("#classSize")
 const btnAddClassRef = document.querySelector("#btnAddClass")
 const addClassFormRef = document.querySelector("#addClassForm")
+const classListDataRef = document.querySelector("#classListData")
 
 // Student
 const bntDisplaytudentFormRef = document.querySelector("#bntDisplaytudentForm")
@@ -1220,13 +1221,19 @@ const dataInitialization = () => {
     }
 
     // Initialize Student data
+    let studentArray = getDataFromStorage(STUDENT_ARRAY_STORAGE_KEY)
+
+    if (studentArray !== null) {
+        STUDENT_ARRAY = studentArray
+    }
 }
 
 // Display Class list 
-const displayClassList = () => {
+const displayCheckboxClassList = () => {
     // Get the class List from the local Storage 
     let classArray = getDataFromStorage(CLASS_ARRAY_STORAGE_KEY)
     const divClassContainer = document.createElement("div")
+
 
     classArray.map(({ id, name }) => {
         divClassContainer.innerHTML += `
@@ -1235,9 +1242,10 @@ const displayClassList = () => {
             <label >${name}</label>
          </div>
          `
-    })
 
+    })
     classListRef.appendChild(divClassContainer)
+
 }
 
 // EVENTS
@@ -1332,7 +1340,7 @@ btnDisplayClassFormRef.addEventListener("click", () => {
 // Unhide / Show Student form 
 bntDisplaytudentFormRef.addEventListener("click", () => {
 
-    displayClassList()
+    displayCheckboxClassList()
 
     formStudentRef.classList.toggle("hide")
 
