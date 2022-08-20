@@ -1123,6 +1123,39 @@ const saveDataToStorage = (STORAGE_KEY, arrayData, data) => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(arrayData))
 }
 
+// DIsplay Class Data on the page load
+const displayClassDataOnPageLoad = (classArray) => {
+    classListDataRef.innerHTML = ""
+
+    //Loop through the class data
+    classArray.map(({ id, name, size, year }) => {
+        classListDataRef.innerHTML += `
+            <tr>
+                <td>${id}</td>
+                <td>${name}</td>
+                <td>${size}</td>
+                <td>${year}</td>
+                <td>
+                    <i data-id="${id}" data-type="edit-icon" class="icon edit-icon"></i> 
+                    <i data-id="${id}" data-type="delete-icon" class="icon delete-icon"></i>
+                </td>
+            </tr>
+        `
+    })
+
+}
+
+// Delete element from array 
+const deleteElementFromArray = (elementID, dataArray, STORAGE_KEY) => {
+    const newDataArray = dataArray.filter(({ id }) => id !== elementID)
+
+    // update localstore with the new array
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(newDataArray))
+
+    // Display New Data on the page
+    displayClassDataOnPageLoad(newDataArray)
+}
+
 // Save Class Info
 // const saveClass = (classInfo) => {
 //         // Check if a class with the same name and year exist 
@@ -1211,6 +1244,7 @@ const saveData = (ARRAY_STORAGE_KEY, ARRAY_DATA, data, arguments) => {
 //     }
 // }
 
+
 // Initialize  DATA 
 const dataInitialization = () => {
     // Initialize class data 
@@ -1218,6 +1252,7 @@ const dataInitialization = () => {
 
     if (classArray !== null) {
         CLASS_ARRAY = classArray
+        displayClassDataOnPageLoad(CLASS_ARRAY)
     }
 
     // Initialize Student data
@@ -1234,6 +1269,7 @@ const displayCheckboxClassList = () => {
     let classArray = getDataFromStorage(CLASS_ARRAY_STORAGE_KEY)
     const divClassContainer = document.createElement("div")
 
+    classListRef.innerHTML = ""
 
     classArray.map(({ id, name }) => {
         divClassContainer.innerHTML += `
@@ -1242,10 +1278,9 @@ const displayCheckboxClassList = () => {
             <label >${name}</label>
          </div>
          `
-
     })
-    classListRef.appendChild(divClassContainer)
 
+    classListRef.appendChild(divClassContainer)
 }
 
 // EVENTS
@@ -1355,6 +1390,37 @@ bntDisplaytudentFormRef.addEventListener("click", () => {
 
 })
 
+// Listening to all click event
+document.addEventListener("click", (e) => {
+    //target.nodeName -> determine the name of the element "I","DIV","BUTTON"
+
+    // Get Class Array
+    let classArray = getDataFromStorage(CLASS_ARRAY_STORAGE_KEY)
+
+    // Run only when an icon is clicked
+    if (e.target.nodeName === "I") {
+        // Get the element that we want to delete from the array
+        const classId = parseInt(e.target.dataset.id)
+
+        // RUn only when the delete icon is clicked
+        if (e.target.dataset.type === "delete-icon") {
+
+            if (confirm("Are you sure you want to delete it!!")) {
+                // Check if classArray is not empty
+                if (classArray !== null) {
+                    CLASS_ARRAY = classArray
+                    deleteElementFromArray(classId, CLASS_ARRAY, CLASS_ARRAY_STORAGE_KEY)
+                }
+            }
+        }
+
+        // Run only when the edit icon is clicked
+        if (e.target.dataset.type === "edit-icon") {
+
+            console.log('edit', classId)
+        }
+    }
+})
 
 // APP init
 dataInitialization()
