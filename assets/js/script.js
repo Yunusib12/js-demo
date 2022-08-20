@@ -1105,24 +1105,6 @@ const classListRef = document.querySelector("#classList")
 
 // FUNCTIONS
 
-// Get data from storage 
-const getDataFromStorage = (STORAGE_KEY) => {
-    if (localStorage.getItem(STORAGE_KEY) !== null) {
-        return JSON.parse(localStorage.getItem(STORAGE_KEY))
-    }
-
-    return null
-}
-
-// Save data to Storage
-const saveDataToStorage = (STORAGE_KEY, arrayData, data) => {
-    // Add data to Array
-    arrayData.push(data)
-
-    // Save Array to Storage (Session / Local)
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(arrayData))
-}
-
 // DIsplay Class Data on the page load
 const displayClassDataOnPageLoad = (classArray) => {
     classListDataRef.innerHTML = ""
@@ -1142,7 +1124,27 @@ const displayClassDataOnPageLoad = (classArray) => {
             </tr>
         `
     })
+}
 
+// Get data from storage 
+const getDataFromStorage = (STORAGE_KEY) => {
+    if (localStorage.getItem(STORAGE_KEY) !== null) {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY))
+    }
+
+    return null
+}
+
+// Save data to Storage
+const saveDataToStorage = (STORAGE_KEY, arrayData, data) => {
+    // Add data to Array
+    arrayData.push(data)
+
+    // Save Array to Storage (Session / Local)
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(arrayData))
+
+    //Update CLass list on the page 
+    displayClassDataOnPageLoad(arrayData)
 }
 
 // Delete element from array 
