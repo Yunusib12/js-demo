@@ -1418,8 +1418,24 @@ document.addEventListener("click", (e) => {
 
         // Run only when the edit icon is clicked
         if (e.target.dataset.type === "edit-icon") {
-
             console.log('edit', classId)
+                /*
+                Step 0 - Trigrer event (Click on edit button) -> done
+                Step 1 - Get ClassId  -> done
+                Step 2 - Access / Read the selected class information from the lacalstorage
+                Step 3 - Display a form with class information filled already 
+                Step 4 - Update the class information on the array
+                            - Get class index from the class
+                            - Update class information (replace)
+                            - Save updated array to localstorage
+                Step 5 - Display updated information to the page 
+                */
+
+            //Step 2 Access / Read the selected class information from the lacalstorage
+            const selectedClassInformation = classArray.find((classInfo) => classInfo.id === classId)
+
+            // Step 3 Display a form with class information filled already
+
         }
     }
 })
