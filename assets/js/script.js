@@ -1089,6 +1089,7 @@ const classSizeRef = document.querySelector("#classSize")
 const btnAddClassRef = document.querySelector("#btnAddClass")
 const addClassFormRef = document.querySelector("#addClassForm")
 const classListDataRef = document.querySelector("#classListData")
+const btnUpdateClassRef = document.querySelector("#btnUpdateClass")
 
 // Student
 const bntDisplaytudentFormRef = document.querySelector("#bntDisplaytudentForm")
@@ -1288,34 +1289,38 @@ const displayCheckboxClassList = () => {
 // EVENTS
 addClassFormRef.addEventListener("submit", (e) => {
     e.preventDefault()
-    const classNameValue = classNameRef.value
-    const classYearValue = classYearRef.value
-    const classSizeValue = classSizeRef.value
+    console.log('e.target', e)
+        // if() {
 
-    // Get Class array from Store 
-    const classArray = getDataFromStorage(CLASS_ARRAY_STORAGE_KEY)
-    console.log('classArray', classArray)
-        // update class array size variable 
-        // CLASS_ARRAY_SIZE = classArray !== null ? classArray.length : 0
-    if (classArray !== null) {
-        CLASS_ARRAY_SIZE = classArray.length
-    }
+    // }
+    // const classNameValue = classNameRef.value
+    // const classYearValue = classYearRef.value
+    // const classSizeValue = classSizeRef.value
 
-    // Class Object 
-    const classInfo = {
-        id: CLASS_ARRAY_SIZE + 1,
-        name: classNameValue,
-        year: classYearValue,
-        size: classSizeValue,
-    }
+    // // Get Class array from Store 
+    // const classArray = getDataFromStorage(CLASS_ARRAY_STORAGE_KEY)
+    // console.log('classArray', classArray)
+    //     // update class array size variable 
+    //     // CLASS_ARRAY_SIZE = classArray !== null ? classArray.length : 0
+    // if (classArray !== null) {
+    //     CLASS_ARRAY_SIZE = classArray.length
+    // }
 
-    const arguments = (classData) => classData.name === classInfo.name && classData.year === classInfo.year
+    // // Class Object 
+    // const classInfo = {
+    //     id: CLASS_ARRAY_SIZE + 1,
+    //     name: classNameValue,
+    //     year: classYearValue,
+    //     size: classSizeValue,
+    // }
 
-    // Save Class info 
-    saveData(CLASS_ARRAY_STORAGE_KEY, CLASS_ARRAY, classInfo, arguments)
+    // const arguments = (classData) => classData.name === classInfo.name && classData.year === classInfo.year
 
-    //Clear form
-    addClassFormRef.reset()
+    // // Save Class info 
+    // saveData(CLASS_ARRAY_STORAGE_KEY, CLASS_ARRAY, classInfo, arguments)
+
+    // //Clear form
+    // addClassFormRef.reset()
 })
 
 // Enroll students 
@@ -1372,6 +1377,8 @@ addStudentFormRef.addEventListener("submit", (e) => {
 // Unhide Class form 
 btnDisplayClassFormRef.addEventListener("click", () => {
     formClassRef.classList.toggle("hide")
+    btnAddClassRef.classList.remove("hide")
+    btnUpdateClassRef.classList.add("hide")
 })
 
 // Unhide / Show Student form 
@@ -1433,12 +1440,23 @@ document.addEventListener("click", (e) => {
 
             //Step 2 Access / Read the selected class information from the lacalstorage
             const selectedClassInformation = classArray.find((classInfo) => classInfo.id === classId)
+            console.log('selectedClassInformation', selectedClassInformation)
 
             // Step 3 Display a form with class information filled already
-
+            // Step 3-1 open class form 
+            formClassRef.classList.toggle("hide")
+            btnAddClassRef.classList.add("hide")
+            btnUpdateClassRef.classList.remove("hide")
         }
     }
 })
+
+// // Update class 
+// btnUpdateClassRef.addEventListener("click", (e) => {
+//     e.preventDefault()
+
+//     console.log('e', e)
+// })
 
 // APP init
 dataInitialization()
