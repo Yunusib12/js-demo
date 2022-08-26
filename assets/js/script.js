@@ -1086,7 +1086,7 @@ const formClassRef = document.querySelector("#formClass")
 const classNameRef = document.querySelector("#className")
 const classYearRef = document.querySelector("#classYear")
 const classSizeRef = document.querySelector("#classSize")
-const btnAddClassRef = document.querySelector("#btnAddClass")
+const btnSaveClassRef = document.querySelector("#btnSaveClass")
 const addClassFormRef = document.querySelector("#addClassForm")
 const classListDataRef = document.querySelector("#classListData")
 const btnUpdateClassRef = document.querySelector("#btnUpdateClass")
@@ -1289,38 +1289,43 @@ const displayCheckboxClassList = () => {
 // EVENTS
 addClassFormRef.addEventListener("submit", (e) => {
     e.preventDefault()
-    console.log('e.target', e)
-        // if() {
 
-    // }
-    // const classNameValue = classNameRef.value
-    // const classYearValue = classYearRef.value
-    // const classSizeValue = classSizeRef.value
+    const bntSubmitterId = e.submitter.id
+    const classNameValue = classNameRef.value
+    const classYearValue = classYearRef.value
+    const classSizeValue = classSizeRef.value
 
-    // // Get Class array from Store 
-    // const classArray = getDataFromStorage(CLASS_ARRAY_STORAGE_KEY)
-    // console.log('classArray', classArray)
-    //     // update class array size variable 
-    //     // CLASS_ARRAY_SIZE = classArray !== null ? classArray.length : 0
-    // if (classArray !== null) {
-    //     CLASS_ARRAY_SIZE = classArray.length
-    // }
+    if (bntSubmitterId === "btnUpdateClass") {
+        //
 
-    // // Class Object 
-    // const classInfo = {
-    //     id: CLASS_ARRAY_SIZE + 1,
-    //     name: classNameValue,
-    //     year: classYearValue,
-    //     size: classSizeValue,
-    // }
+    }
 
-    // const arguments = (classData) => classData.name === classInfo.name && classData.year === classInfo.year
+    if (bntSubmitterId === "btnSaveClass") {
 
-    // // Save Class info 
-    // saveData(CLASS_ARRAY_STORAGE_KEY, CLASS_ARRAY, classInfo, arguments)
+        // Get Class array from Store 
+        const classArray = getDataFromStorage(CLASS_ARRAY_STORAGE_KEY)
 
-    // //Clear form
-    // addClassFormRef.reset()
+        // update class array size variable 
+        if (classArray !== null) {
+            CLASS_ARRAY_SIZE = classArray.length
+        }
+
+        // Class Object 
+        const classInfo = {
+            id: CLASS_ARRAY_SIZE + 1,
+            name: classNameValue,
+            year: classYearValue,
+            size: classSizeValue,
+        }
+
+        const arguments = (classData) => classData.name === classInfo.name && classData.year === classInfo.year
+
+        // Save Class info 
+        saveData(CLASS_ARRAY_STORAGE_KEY, CLASS_ARRAY, classInfo, arguments)
+
+        //Clear form
+        addClassFormRef.reset()
+    }
 })
 
 // Enroll students 
@@ -1445,8 +1450,20 @@ document.addEventListener("click", (e) => {
             // Step 3 Display a form with class information filled already
             // Step 3-1 open class form 
             formClassRef.classList.toggle("hide")
-            btnAddClassRef.classList.add("hide")
+            btnSaveClassRef.classList.add("hide")
             btnUpdateClassRef.classList.remove("hide")
+
+            // Step 3-2 Fill the information on the form 
+            const { name, year, size } = selectedClassInformation
+
+            classNameRef.value = name
+            classYearRef.value = year
+            classSizeRef.value = size
+
+            /* How to get the class id to the form before submitting
+                - 
+            ```
+            */
         }
     }
 })
