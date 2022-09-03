@@ -1335,6 +1335,9 @@ addClassFormRef.addEventListener("submit", (e) => {
         //Data initiliaze 
         dataInitialization()
 
+        // Close the form 
+        formClassRef.classList.add("hide")
+
     }
 
     if (bntSubmitterId === "btnSaveClass") {
@@ -1485,7 +1488,14 @@ document.addEventListener("click", (e) => {
 
             // Step 3 Display a form with class information filled already
             // Step 3-1 open class form 
-            formClassRef.classList.toggle("hide")
+
+            console.log('formClassRef', formClassRef.classList.value.includes("hide"))
+            const isFormClosed = formClassRef.classList.value.includes("hide")
+
+            if (isFormClosed) {
+                formClassRef.classList.toggle("hide")
+            }
+
             btnSaveClassRef.classList.add("hide")
             btnUpdateClassRef.classList.remove("hide")
 
