@@ -1090,6 +1090,7 @@ const btnSaveClassRef = document.querySelector("#btnSaveClass")
 const addClassFormRef = document.querySelector("#addClassForm")
 const classListDataRef = document.querySelector("#classListData")
 const btnUpdateClassRef = document.querySelector("#btnUpdateClass")
+const classIdRef = document.querySelector("#classId")
 
 // Student
 const bntDisplaytudentFormRef = document.querySelector("#bntDisplaytudentForm")
@@ -1111,9 +1112,10 @@ const displayClassDataOnPageLoad = (classArray) => {
     classListDataRef.innerHTML = ""
 
     //Loop through the class data
-    classArray.map(({ id, name, size, year }) => {
+    classArray.map(({ id, name, size, year }, index) => {
         classListDataRef.innerHTML += `
             <tr>
+                <td>${index + 1}</td>
                 <td>${id}</td>
                 <td>${name}</td>
                 <td>${size}</td>
@@ -1154,6 +1156,9 @@ const deleteElementFromArray = (elementID, dataArray, STORAGE_KEY) => {
 
     // update localstore with the new array
     localStorage.setItem(STORAGE_KEY, JSON.stringify(newDataArray))
+
+    //data initialize
+    dataInitialization()
 
     // Display New Data on the page
     displayClassDataOnPageLoad(newDataArray)
@@ -1294,16 +1299,44 @@ addClassFormRef.addEventListener("submit", (e) => {
     const classNameValue = classNameRef.value
     const classYearValue = classYearRef.value
     const classSizeValue = classSizeRef.value
+    const classIdValue = parseInt(classIdRef.value)
+
+    // Get Class array from Store 
+    const classArray = getDataFromStorage(CLASS_ARRAY_STORAGE_KEY)
 
     if (bntSubmitterId === "btnUpdateClass") {
-        //
+        //Create an object that contains the updated class information
+        const classInfoUpdate = {
+            id: classIdValue,
+            name: classNameValue,
+            size: classSizeValue,
+            year: classYearValue,
+        }
+
+        // console.log('typeof(classIdValue)', typeof(classIdValue))
+
+        //Delete the current class information
+        const newClassArray = classArray.filter(({ id }) => id !== classIdValue)
+
+        // console.log('newClassArray', newClassArray)
+
+        // console.log('classInfoUpdate', classInfoUpdate)
+
+        //Add the new class array with the new class info updated, Update localStorage and display to the page 
+        // newClassArray.push(classInfoUpdate)
+        // console.log('newClassArray', newClassArray)
+
+        saveDataToStorage(CLASS_ARRAY_STORAGE_KEY, newClassArray, classInfoUpdate)
+
+
+        //Clear form
+        addClassFormRef.reset()
 
     }
 
     if (bntSubmitterId === "btnSaveClass") {
 
-        // Get Class array from Store 
-        const classArray = getDataFromStorage(CLASS_ARRAY_STORAGE_KEY)
+        const classId = Date.now()
 
         // update class array size variable 
         if (classArray !== null) {
@@ -1312,7 +1345,7 @@ addClassFormRef.addEventListener("submit", (e) => {
 
         // Class Object 
         const classInfo = {
-            id: CLASS_ARRAY_SIZE + 1,
+            id: classId,
             name: classNameValue,
             year: classYearValue,
             size: classSizeValue,
@@ -1344,7 +1377,7 @@ addStudentFormRef.addEventListener("submit", (e) => {
 
         // Get Student array from LocalStorage 
         const studentArray = getDataFromStorage(STUDENT_ARRAY_STORAGE_KEY)
-
+        const studentId = Date.now()
 
         // update class array size variable 
         if (studentArray !== null) {
@@ -1353,7 +1386,7 @@ addStudentFormRef.addEventListener("submit", (e) => {
 
         // Student Object 
         let studentInfo = {
-            id: STUDENT_ARRAY_SIZE + 1,
+            id: studentId,
             firstName: firstNameValue,
             lastName: lastNameValue,
             email: emailValue,
@@ -1382,7 +1415,7 @@ addStudentFormRef.addEventListener("submit", (e) => {
 // Unhide Class form 
 btnDisplayClassFormRef.addEventListener("click", () => {
     formClassRef.classList.toggle("hide")
-    btnAddClassRef.classList.remove("hide")
+    btnSaveClassRef.classList.remove("hide")
     btnUpdateClassRef.classList.add("hide")
 })
 
@@ -1438,7 +1471,7 @@ document.addEventListener("click", (e) => {
                 Step 3 - Display a form with class information filled already 
                 Step 4 - Update the class information on the array
                             - Get class index from the class
-                            - Update class information (replace)
+                            - Update class information (replace -> delete + add/create)
                             - Save updated array to localstorage
                 Step 5 - Display updated information to the page 
                 */
@@ -1454,15 +1487,17 @@ document.addEventListener("click", (e) => {
             btnUpdateClassRef.classList.remove("hide")
 
             // Step 3-2 Fill the information on the form 
-            const { name, year, size } = selectedClassInformation
+            const { id, name, year, size } = selectedClassInformation
 
             classNameRef.value = name
             classYearRef.value = year
             classSizeRef.value = size
+            classIdRef.value = id
 
             /* How to get the class id to the form before submitting
-                - 
-            ```
+                - option 1 : save the id as a global variable (String, array,..)
+                - option 2 : create input element of type hidden to save the id ON 
+                - option 3 : localStorage / sessionStorage
             */
         }
     }
