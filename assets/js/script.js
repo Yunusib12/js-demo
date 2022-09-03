@@ -1484,16 +1484,16 @@ document.addEventListener("click", (e) => {
 
             //Step 2 Access / Read the selected class information from the lacalstorage
             const selectedClassInformation = classArray.find((classInfo) => classInfo.id === classId)
-            console.log('selectedClassInformation', selectedClassInformation)
+                // console.log('selectedClassInformation', selectedClassInformation)
 
             // Step 3 Display a form with class information filled already
             // Step 3-1 open class form 
 
-            console.log('formClassRef', formClassRef.classList.value.includes("hide"))
+            // console.log('formClassRef', formClassRef.classList.value.includes("hide"))
             const isFormClosed = formClassRef.classList.value.includes("hide")
 
             if (isFormClosed) {
-                formClassRef.classList.toggle("hide")
+                formClassRef.classList.remove("hide")
             }
 
             btnSaveClassRef.classList.add("hide")
