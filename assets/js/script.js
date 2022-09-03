@@ -1332,6 +1332,9 @@ addClassFormRef.addEventListener("submit", (e) => {
         //Clear form
         addClassFormRef.reset()
 
+        //Data initiliaze 
+        dataInitialization()
+
     }
 
     if (bntSubmitterId === "btnSaveClass") {
